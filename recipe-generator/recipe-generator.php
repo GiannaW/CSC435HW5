@@ -59,7 +59,7 @@ function generate_recipe($name) {
 
 function generate_recipe_name($name) {
   # implement me!
-    $folder_name="food";
+    $folder_name="foods";
     $lowercaseword=strtolower($name);
     $letter=($lowercase[0]);
     
@@ -71,6 +71,14 @@ function generate_ingredients($name) {
     ## first letter of the name var 
     ## get lowercase fir
   # implement me!
+    
+     $folder_name='ingredients';
+    $lowercaseword=strtolower($name);
+    for ($i = 0; $x <= 10; $x++){
+        
+        
+        
+    }
 }
 
 # (PROVIDED HELPER FUNCTIONS)
@@ -86,24 +94,15 @@ function output_ingredient_intro() {
 # Returns a random line from the txt file corresponding to the letter and folder name.
 # Pre: $letter is a single alphabetical letter
 function get_random_line_from_letter($folder_name, $letter) {
-    $folder_name='ingredients';
-    $lowercaseword=strtolower($name);
-    for ($i = 0; $x <= 10; $x++){
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    
+   
+
   # Remember that file returns an array of all of the lines in a file
   # implement me (replace "" with the necessary value to get the file as an array of lines)! 
   $choices = file("{$folder_name}/{$letter}.txt");
 
+
   # array_rand is a function that returns a random element from an array
   return $choices[array_rand($choices)];
+}
 
 ?>
