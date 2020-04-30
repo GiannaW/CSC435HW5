@@ -18,17 +18,17 @@ error_reporting(E_ALL);
 # 1. Check whether the correct parameter(s) are set, printing a helpful error message
 # otherwise.
 
-if (isset($_GET)["name"]){
-    $name=$_GET["name"];
-    generate_recipe($name);
+if (isset($_GET["name"])) {
+  $name = $_GET["name"];
+  generate_recipe($name);
+    
 }
-
-else { 
-    print("an error has happend.. Please put in the name in the URL")
+else {
+  print ("An error occured. Please ensure you filled in a name");
 }
 
 # 2. Remember to set the content-type for each web service! This web service outputs plain txt.
-
+header("Content-type: text/plain");
 # Finish this "main function" to generate the entire recipe. Pass in your query parameter value
 # to this function. Use helper functions to factor out meaningful behavior!
 function generate_recipe($name) {
@@ -37,9 +37,12 @@ function generate_recipe($name) {
     generate_recipe_name($name);
     generate_ingredients($name);
     
+    print("Cook for " .strlen($name). " minutes and serve");
+  
     
     
-    echo "Welcome ". $_GET['name']. "<br />";
+    
+ 
     
     
     
@@ -60,11 +63,12 @@ function generate_recipe($name) {
 function generate_recipe_name($name) {
   # implement me!
     $folder_name="foods";
-    $lowercaseword=strtolower($name);
-    $letter=($lowercase[0]);
+    $lowercaseword=strtolower($name[0]);
+    $filereader=get_random_line_from_letter("foods",$lowercaseword);
+    print("{$name}'s {$filereader}");
+   
     
-    print("$name", get_random_line_from_letter($folder_name, $letter))
-
+   
 }
 
 function generate_ingredients($name) { 
@@ -72,13 +76,19 @@ function generate_ingredients($name) {
     ## get lowercase fir
   # implement me!
     
-     $folder_name='ingredients';
-    $lowercaseword=strtolower($name);
-    for ($i = 0; $x <= 10; $x++){
+    
+    
+    for ($i = 1; $i <= strlen($name); $i++){
+        $lowercaseword=strtolower($name[$i]);
+        $filereader=get_random_line_from_letter('ingredients',$lowercaseword);
         
-        
+        print("{$filereader}");
+
         
     }
+    
+    
+     
 }
 
 # (PROVIDED HELPER FUNCTIONS)
@@ -98,7 +108,8 @@ function get_random_line_from_letter($folder_name, $letter) {
 
   # Remember that file returns an array of all of the lines in a file
   # implement me (replace "" with the necessary value to get the file as an array of lines)! 
-  $choices = file("{$folder_name}/{$letter}.txt");
+
+    $choices = file("{$folder_name}/{$letter}.txt");
 
 
   # array_rand is a function that returns a random element from an array
